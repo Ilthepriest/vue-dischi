@@ -14,7 +14,7 @@ export default {
 
 <style lang="scss" scoped>
 .row{
-    background-color: #2E3A46;
+    background-color: $bg-header;
     height: 100px;
     img{
         width: 70px;

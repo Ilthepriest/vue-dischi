@@ -18,12 +18,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-     p {
-    color: #7a7571;
+<style lang="scss" >
+  p {
+    color: $secondary-text;
   }
   .bg_card {
-    background-color: #2e3a46;
+    background-color: $bg-card !important;
   }
   h5 {
     color: white;

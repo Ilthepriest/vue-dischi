@@ -50,6 +50,6 @@ export default {
 .container-fluid {
   height: calc(100vh - 100px);
   overflow: auto;
-  background-color: #1e2d3b;
+  background-color: $bg-color;
 }
 </style>
