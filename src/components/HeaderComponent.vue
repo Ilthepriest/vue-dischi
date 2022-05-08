@@ -1,14 +1,31 @@
 <template>
   <div class="container-fluid">
-      <div class="row">
+      <div class="row d-flex justify-content-between align-items-center">
           <img src="@/assets/img/logo-small.svg" alt="">
+          <SiteSelectAuthor @selectAuthor="search" v-model="authorSelected"/>
       </div>
   </div>
 </template>
 
 <script>
+import SiteSelectAuthor from "@/components/SelecetAuthorComponent.vue";
+import state from "@/state.js"
 export default {
-    nome: 'SiteHeader'
+    nome: 'SiteHeader',
+    components:{
+        SiteSelectAuthor
+    },
+      methods: {
+    search() {
+      state.searchText = this.authorSelected;
+    },
+  },
+  data() {
+    return {
+      searchText: "",
+      authorSelected: ""
+    };
+  },
 }
 </script>
 

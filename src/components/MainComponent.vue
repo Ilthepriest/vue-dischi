@@ -1,8 +1,9 @@
 <template>
-  <div class="container-fluid">
+  <div class="container-fluid d-flex flex-column align-items-center">
+    <SiteSelect @selectGenere="search" v-model="genreSelected"/>
     <div class="container">
       <div class="row pt-5" v-if="!loader">
-          <SiteDisk :disk="disc" v-for="(disc, index) in discs" :key="index"/>
+          <SiteDisk :disk="disc" v-for="(disc, index) in filtered" :key="index"/>
       </div>
       <div v-else>
         <div class="text-center ">
@@ -16,19 +17,45 @@
 </template>
 
 <script>
+import state from "@/state.js";
 import axios from "axios";
+import SiteSelect from "@/components/SelectComponent.vue";
 import SiteDisk from "@/components/DiscComponent.vue"
 export default {
   nome: "SiteMain",
   components:{
       SiteDisk,
+      SiteSelect
+  },
+  methods:{
+     search() {
+      console.log('Searching ...');
+      console.log(this.genreSelected);
+    }
+  },
+  computed:{
+    filtered(){
+       if(state.searchText) {
+        return this.discs.filter(disc => {
+          return disc.author.toLowerCase() == state.searchText.toLowerCase()
+        })
+      }else if(this.genreSelected){
+        return this.discs.filter(disc => {
+          return disc.genre.toLowerCase() == this.genreSelected.toLowerCase()
+        })
+      }
+      else {
+        return this.discs
+      }
+    },
   },
   data() {
     return {
       link: "https://flynn.boolean.careers/exercises/api/array/music",
       discs: null,
       loader: true,
-      error: null
+      error: null,
+      genreSelected:''   
     };
   },
   mounted() {
